@@ -33,7 +33,9 @@ class Slide(models.Model):
 	typeOfSlide = models.ForeignKey(Slide_Types, verbose_name="Type of Slide")				#	Each slide must be designated a type existing in the Slide_Types table
 	story = models.ForeignKey(Story, verbose_name="Belonging to Story")
 	summary = models.CharField(max_length=500, verbose_name="Description", null=True)
-	#memberImages = models.ManyToManyField(Image, db_table="Images_In_Slide", verbose_name="Member Images")
+
+	def __unicode__(self):
+		return str(self.slide_id)
 
 
 class Image(models.Model):
@@ -46,3 +48,11 @@ class Image(models.Model):
 	caption = models.CharField(max_length=150, verbose_name="Image Caption")
 	dateTaken = models.DateField(auto_now=False, null=True, verbose_name="Date Photo Taken")			#	They input when the photo was taken? this is an optional value
 
+	def __unicode__(self):
+		return str(self.image_id)
+
+	# def __unicode__(self):
+	# 	toRet = "Part of Slide:\t" + str(self.slide) + "\nCaption:\t" + self.caption
+	# 	return toRet
+
+	# x, y coords, z-index (integers) 
