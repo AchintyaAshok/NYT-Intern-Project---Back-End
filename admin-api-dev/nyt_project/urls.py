@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     # The function inside the app's views
     #url(r'^$', views.index, name='Index Page'),
 
-    url(r'^$', views.test_api_call, name='API Page'),
+    url(r'^test', views.test, name='API Page'),
+    url(r'^getAllStories', views.get_all_stories, name='Get All Stories'),
 
 )
 
