@@ -21,17 +21,6 @@ class Story(models.Model):
 		return self.headline
 
 
-# class Image(models.Model):
-# 	image_id = models.AutoField(primary_key=True)
-
-# 	width = models.PositiveIntegerField(verbose_name="Width (pixels)")
-# 	height = models.PositiveIntegerField(verbose_name="Height (pixels)")
-# 	image = models.ImageField(upload_to="Images", height_field="height", width_field="width", verbose_name="Photo")
-# 	photo_credit = models.CharField(max_length=50, verbose_name="Photo Credit")
-# 	caption = models.CharField(max_length=150, verbose_name="Image Caption")
-# 	dateTaken = models.DateField(auto_now=False, null=True, verbose_name="Date Photo Taken")			#	They input when the photo was taken? this is an optional value
-
-
 class Slide_Types(models.Model):
 	type_name = models.CharField(max_length=30, primary_key=True, verbose_name="Type of Slide")
 
@@ -42,14 +31,14 @@ class Slide_Types(models.Model):
 class Slide(models.Model):
 	slide_id = models.AutoField(primary_key=True)
 	typeOfSlide = models.ForeignKey(Slide_Types, verbose_name="Type of Slide")				#	Each slide must be designated a type existing in the Slide_Types table
-	story_id = models.ForeignKey(Story, verbose_name="Belonging to Story")
+	story = models.ForeignKey(Story, verbose_name="Belonging to Story")
 	summary = models.CharField(max_length=500, verbose_name="Description", null=True)
 	#memberImages = models.ManyToManyField(Image, db_table="Images_In_Slide", verbose_name="Member Images")
 
 
 class Image(models.Model):
 	image_id = models.AutoField(primary_key=True)
-	slide_id = models.ForeignKey(Slide, verbose_name="Belonging to Slide")
+	slide = models.ForeignKey(Slide, verbose_name="Belonging to Slide")
 	width = models.PositiveIntegerField(verbose_name="Width (pixels)")
 	height = models.PositiveIntegerField(verbose_name="Height (pixels)")
 	image = models.ImageField(upload_to="Images", height_field="height", width_field="width", verbose_name="Photo")
