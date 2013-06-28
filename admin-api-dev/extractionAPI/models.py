@@ -34,6 +34,9 @@ class Slide(models.Model):
 	story = models.ForeignKey(Story, verbose_name="Belonging to Story")
 	summary = models.CharField(max_length=500, verbose_name="Description", null=True)
 
+	def __unicode__(self):
+		return str(self.slide_id)
+
 
 class Image(models.Model):
 	image_id = models.AutoField(primary_key=True)
@@ -46,5 +49,10 @@ class Image(models.Model):
 	dateTaken = models.DateField(auto_now=False, null=True, verbose_name="Date Photo Taken")			#	They input when the photo was taken? this is an optional value
 
 	def __unicode__(self):
-		toRet = "Part of Slide:\t" + self.slide + "\nCaption:\t" + self.caption
-		return toRet
+		return str(self.image_id)
+
+	# def __unicode__(self):
+	# 	toRet = "Part of Slide:\t" + str(self.slide) + "\nCaption:\t" + self.caption
+	# 	return toRet
+
+	# x, y coords, z-index (integers) 
