@@ -12,6 +12,9 @@ import json, collections
 #cached_slides = Slide.objects.all()
 
 
+def index(request):
+	return HttpResponse("<h3>This is the Index.</h3>")
+
 def test(request):
 	return HttpResponse("<h3>You're at the API Call!</h3>");
 
