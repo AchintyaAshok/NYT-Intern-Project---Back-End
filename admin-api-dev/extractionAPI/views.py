@@ -12,6 +12,9 @@ import json, collections
 #cached_slides = Slide.objects.all()
 
 
+def index(request):
+	return HttpResponse("<h3>This is the Index.</h3>")
+
 def test(request):
 	return HttpResponse("<h3>You're at the API Call!</h3>");
 
@@ -37,10 +40,18 @@ def get_story_object(story):
 	storyObj['author'] = story.author_firstName + ' ' + story.author_lastName
 	#storyObj['date-created'] = story.timeCreated
 
+	# Compile data about the coverphoto and include it as an entry
+	coverphotoInfo = collections.OrderedDict()
+	coverphotoInfo['url'] = story.coverPhoto.url
+	coverphotoInfo['width'] = story.coverPhoto.width
+	coverphotoInfo['height'] = story.coverPhoto.height
+	storyObj['coverPhoto'] = coverphotoInfo
+
 	tagList = []
 	for tag in story.storyTags.all():	#	the all() function gets all the elements for the field which is m2m
 		tagList.append(str(tag))
 	storyObj['Tags'] = tagList
+
 
 	storyObj['slides'] = get_slides_for_story(story.story_id)	
 
@@ -51,7 +62,6 @@ def get_story_object(story):
 def get_slides_for_story(story_id):
 
 	slides = []
-	#slidesInStory = cached_slides.filter(story=str(story_id))
 	slidesInStory = Slide.objects.filter(story=str(story_id))
 	
 	for slide in slidesInStory:
@@ -67,10 +77,8 @@ def get_slide_object(slide):
 	slideObj['slide_id'] = slide.slide_id
 	slideObj['slide_type'] = str(slide.typeOfSlide)
 	slideObj['summary'] = slide.summary
-
-	#imageList = get_images_for_slide(slide.slide_id)
-	#slideObj['images'] = imageList
 	slideObj['images'] = get_images_for_slide(slide.slide_id)
+
 	return slideObj
 
 
@@ -88,10 +96,9 @@ def get_images_for_slide(slide_id):
 def get_image_object(img):
 	imageObj = collections.OrderedDict()
 	imageObj['image_id'] = img.image_id
-	#imageObj['image_url'] = image.image 	# give the absolute path to the image so it can be pulled
-	imageObj['image_url'] = 'empty_url_str_placeholder'
-	imageObj['width'] = img.width
-	imageObj['height'] = img.height
+	imageObj['image_url'] = img.image.url 	# give the absolute path to the image so it can be pulled
+	imageObj['width'] = img.image.width
+	imageObj['height'] = img.image.height
 	imageObj['caption'] = img.caption
 	imageObj['credit'] = img.photo_credit
 	#imageObj['date-taken'] = image.dateTaken

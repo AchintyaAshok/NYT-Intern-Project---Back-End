@@ -23,6 +23,9 @@ DATABASES = {
     }
 }
 
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -54,8 +57,9 @@ USE_TZ = True
 # Example: "/var/www/example.com/media/"
 #MEDIA_ROOT = '/Users/205365/Desktop/django_media'
 
-MEDIA_ROOT =  os.path.join('/Users/205365/opt/django-projects/nyt_innovation_challenge/extractionAPI', 'media/')
-ADMIN_MEDIA_ROOT = os.path.join('/Users/205365/opt/django-projects/nyt_innovation_challenge/extractionAPI', 'admin-media/')
+MEDIA_ROOT =  os.path.join(PROJECT_PATH, 'media/')
+ADMIN_MEDIA_ROOT = os.path.join(PROJECT_PATH, 'admin-media/')
+
 MEDIA_URL = '/'
 ADMIN_MEDIA_PREFIX = 'http:/localhost:8000/admin-media/'
 
