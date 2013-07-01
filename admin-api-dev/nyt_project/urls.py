@@ -1,3 +1,5 @@
+import os
+
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from extractionAPI import views
@@ -23,6 +25,7 @@ urlpatterns = patterns('',
 
     url(r'^test', views.test, name='API Page'),
     url(r'^getAllStories', views.get_all_stories, name='Get All Stories'),
+    #url(r'^Images', os.path.basename(__file__) + '/Images', name="Image Directory"),
 
 )
 
