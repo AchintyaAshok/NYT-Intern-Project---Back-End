@@ -5,18 +5,20 @@ from extractionAPI.models import *
 
 class ImageAdmin(admin.ModelAdmin):
 	fieldsets = [
-		('Photo', {'fields':['image', 'width', 'height']}),
+		('Photo', {'fields':['image']}),
+		# ('Photo', {'fields':['image', 'width', 'height']}),
 		('Photo Data', {'fields':['caption', 'photo_credit']}),
-		('Date Taken', {'fields':['dateTaken'], 'classes':['collapse']}),
+		('Date Taken', {'fields':['dateTaken']}),
 	]
 
 class ImageInline(admin.StackedInline):
 	model = Image
 
 	fieldsets = [
-	('Photo', {'fields':['image', 'width', 'height']}),
+	('Photo', {'fields':['image']}),
+	# ('Photo', {'fields':['image', 'width', 'height']}),
 	('Photo Data', {'fields':['caption', 'photo_credit']}),
-	('Date Taken', {'fields':['dateTaken'], 'classes':['collapse']}),
+	('Date Taken', {'fields':['dateTaken']}),
 	]
 
 	extra = 1
@@ -27,10 +29,6 @@ class SlideInline(admin.StackedInline):
 	extra = 1
 	radio_fields = {'typeOfSlide':admin.HORIZONTAL}
 
-	inlines = [ImageInline]
-
-	# inlines = [ImageAdmin]
-	#list_display = (Image)
 
 class SlideAdmin(admin.ModelAdmin):
 
